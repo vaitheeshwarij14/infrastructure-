@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  terraform: circleci/terraform@0.2.1
+  terraform: circleci/terraform@3.2.1
 
 jobs:
   deploy_infrastructure:
@@ -10,10 +10,11 @@ jobs:
     steps:
       - checkout
       - terraform/init:
-          path: D:\main.tf
-      - terraform/apply:
-          path: D:\main.tf
-          
+          path: infrastructure-/main.tf  # This is the directory containing your Terraform configuration files
+      - run:
+          name: Apply Terraform Changes
+          command: terraform apply -auto-approve
+          working_directory: infrastructure-/main.tf  # This is the working directory for the terraform apply command
 
   manual_approval:
     docker:
@@ -32,7 +33,7 @@ workflows:
           filters:
             branches:
               only:
-                - main  # Adjust the branch as needed
+                - circleci-project-setup  # Adjust the branch as needed
       - manual_approval:
           type: approval
           requires:
