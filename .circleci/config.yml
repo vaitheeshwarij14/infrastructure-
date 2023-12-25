@@ -1,5 +1,6 @@
 version: 2.1
-
+orbs:
+  terraform: hashicorp/terraform@3.2.1
 jobs:
   deploy_infrastructure:
     docker:
