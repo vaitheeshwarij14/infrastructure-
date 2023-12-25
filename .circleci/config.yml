@@ -1,4 +1,5 @@
 version: 2.1
+
 orbs:
   terraform: circleci/terraform@3.2.1
 
@@ -10,10 +11,10 @@ jobs:
       - checkout
       - terraform/init:
           path: D:\main.tf
-      - terraform/apply:
-          path: D:\main.tf
-          # Add the auto-approve flag to automatically approve the changes
-          extra_args: ["-auto-approve"]
+      - run:
+          name: Apply Terraform Changes
+          command: terraform apply -auto-approve
+          working_directory: D:\main.tf
 
   manual_approval:
     docker:
