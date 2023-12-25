@@ -10,11 +10,11 @@ jobs:
     steps:
       - checkout
       - terraform/init:
-          path: main.tf
+          path: infrastructure-/main.tf
       - run:
           name: Apply Terraform Changes
           command: terraform apply -auto-approve
-          working_directory: main.tf
+          working_directory: infrastructure-/main.tf
 
   manual_approval:
     docker:
