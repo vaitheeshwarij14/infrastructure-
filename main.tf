@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "ap-south-1"
   access_key = "AKIAVGTZN2DJZ4D2RZ4A"
   secret_key = "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"
 }
@@ -19,7 +19,7 @@ resource "aws_subnet" "public_subnet" {
   cidr_block = "10.0.0.0/24"
   map_public_ip_on_launch = true
   availability_zone = "ap-south-1a"
-
+  region = "ap-south-1"
   tags = {
     Name = "public-subnet"
   }
@@ -29,7 +29,7 @@ resource "aws_subnet" "private_subnet" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "ap-south-1b"
-  
+  region = "ap-south-1"
   tags = {
     Name = "private-subnet"
   }
