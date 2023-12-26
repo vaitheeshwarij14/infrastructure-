@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   deploy_infrastructure:
-    docker:
+    docker: 
       - image: hashicorp/terraform:light
     steps:
       - checkout
