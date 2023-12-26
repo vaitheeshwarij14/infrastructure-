@@ -17,7 +17,7 @@ workflows:
         attach-workspace: true
         context: terraform
         filters:
-          branches:main
-            only: 
+          branches:
+            only:main
         requires:
         - terraform/plan
