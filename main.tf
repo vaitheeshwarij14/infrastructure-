@@ -2,7 +2,7 @@ provider "aws" {
   access_key = "AKIAVGTZN2DJZ4D2RZ4A"
   secret_key = "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"
 }
-
+ 
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   enable_dns_support   = true
