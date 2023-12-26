@@ -4,7 +4,7 @@ orbs:
   terraform: circleci/terraform@3.2.1
 
 jobs:
-  deploy_infrastructure:
+  deploy_infrastructure: 
     docker:
       - image: hashicorp/terraform:light
     steps:
