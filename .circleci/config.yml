@@ -1,38 +1,23 @@
-version: 2.1
-
+version: '2.1'
 orbs:
   terraform: circleci/terraform@3.2.1
-
-jobs:
-  deploy_infrastructure:
-    docker:
-      - image: hashicorp/terraform:light
-    steps:
-      - checkout
-      - terraform/init
-      - run:
-          name: Apply Terraform Changes
-          command: terraform apply -auto-approve
-
-  manual_approval:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: Manual Approval
-          command: echo "This job requires manual approval"
-
 workflows:
-  version: 2
-  deployment_workflow:
+  deploy_infra:
     jobs:
-      - deploy_infrastructure:
-          filters:
-            branches:
-              only:
-                - circleci-project-setup  # Adjust the branch as needed
-      - manual_approval:
-          type: approval
-          requires:
-            - deploy_infrastructure
+    - terraform/validate:
+        checkout: true
+        context: terraform
+    - terraform/plan:
+        checkout: true
+        context: terraform
+        persist-workspace: true
+        requires:
+        - terraform/validate
+    - terraform/apply:
+        attach-workspace: true
+        context: terraform
+        filters:
+          branches:circleci-project-setup
+            only: 
+        requires:
+        - terraform/plan
