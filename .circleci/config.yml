@@ -2,19 +2,17 @@ version: 2.1
 
 orbs:
   terraform: circleci/terraform@3.2.1
-  
+
 jobs:
   deploy_infrastructure:
     docker:
       - image: hashicorp/terraform:light
     steps:
       - checkout
-      - terraform/init:
-          path: infrastructure-/main.tf
+      - terraform/init
       - run:
           name: Apply Terraform Changes
           command: terraform apply -auto-approve
-          working_directory: infrastructure-/main.tf
 
   manual_approval:
     docker:
