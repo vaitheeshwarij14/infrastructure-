@@ -17,7 +17,7 @@ workflows:
         attach-workspace: true
         context: terraform
         filters:
-          branches:circleci-project-setup
+          branches:main
             only: 
         requires:
         - terraform/plan
